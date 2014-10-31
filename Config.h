@@ -5,7 +5,7 @@
   // Variables
  #define METRIC 0
  #define IMPERIAL 1
- #define MAXSCREENITEMS 27
+ #define MAXSCREENITEMS 26
  
  //Analog input defines
  // **** WiteSpy hardware **** //

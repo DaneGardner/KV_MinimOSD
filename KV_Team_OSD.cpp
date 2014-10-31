@@ -224,7 +224,7 @@ const char configMsg97[] PROGMEM = "MAX TEMP";
 //-----------------------------------------------------------
 int8_t screenitemselect=0; // pointer for item text strings
 int8_t screen_pos_item_pointer=EEPROM_SETTINGS+1;  // pointer for first item display/row/col positions
-#define MAXSCREENITEMS 26 // 28 w/ GPS alt & Temperature
+//#define MAXSCREENITEMS 26 // 28 w/ GPS alt & Temperature
 
 // Strings for item select on screen
 //-----------------------------------------------------------
