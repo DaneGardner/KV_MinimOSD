@@ -38,6 +38,8 @@
 
 #define DECIMAL '.'                 // Decimal point character, change to what suits you best (.) (,)
 
+#define WATCHDOG
+
 /*----------------------------------------------       End of configurable parameters      ----------------------------------------------------*/
 
 #define ACCELEROMETER  1//0b00000001

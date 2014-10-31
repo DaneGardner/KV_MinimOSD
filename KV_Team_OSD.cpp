@@ -11,6 +11,10 @@
 #include "Screen.h"
 #include "KV_Team_OSD.h"
 
+#ifdef WATCHDOG
+#include <avr/wdt.h>         // Watchdog timer support
+#endif
+
 // ----Variables---
 //Analog input defines
 //static const uint16_t voltagePin=0;
@@ -366,6 +370,10 @@ void setup()
   setMspRequests();
 
   blankserialRequest(MSP_IDENT);
+  
+#ifdef WATCHDOG
+  wdt_enable(WDTO_250MS);
+#endif
 }
 
 
@@ -508,6 +516,10 @@ void loop()
   {
     previous_millis_high = currentMillis;   
 
+#ifdef WATCHDOG
+    wdt_reset();       // Reset the watchdog timer
+#endif
+
     calculateTrip();      // Speed integration on 50msec
     if (!Settings[S_MWAMPERAGE]) calculateAmperage();  // Amperage and amperagesum integration on 50msec
     
@@ -561,8 +573,12 @@ void loop()
       blankserialRequest(MSPcmdsend);     
 
     //MAX7456_DrawScreen();
-    
+	
+#ifdef WATCHDOG
+    if( !armed && allSec < 6 ){   // six seconds is too long if we're already in the air!
+#else
     if( allSec < 6 ){
+#endif
       displayIntro(KVTeamVersionPosition);
       lastCallSign = onTime;
     }  

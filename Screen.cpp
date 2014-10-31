@@ -542,7 +542,12 @@ void displayIntro(char position)
   MAX7456_WriteString_P(MultiWiiLogoL3Add, position+120+LINE+LINE);
 
   MAX7456_WriteString_P(message5, position+120+LINE+LINE+LINE);
-  MAX7456_WriteString(itoa(MW_STATUS.version,screenBuffer,10),position+131+LINE+LINE+LINE);
+#ifdef WATCHDOG
+  MAX7456_WriteString(itoa(MW_STATUS.version,screenBuffer,10), position+131+LINE+LINE+LINE);
+  MAX7456_WriteString("WD", position+135+LINE+LINE+LINE);
+#else
+  MAX7456_WriteString(itoa(MW_STATUS.version,screenBuffer,10), position+131+LINE+LINE+LINE);
+#endif
 
   MAX7456_WriteString_P(message6, position+120+LINE+LINE+LINE+LINE+LINE);
   MAX7456_WriteString_P(message7, position+125+LINE+LINE+LINE+LINE+LINE+LINE);
