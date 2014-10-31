@@ -39,6 +39,8 @@
 #define DECIMAL '.'                 // Decimal point character, change to what suits you best (.) (,)
 
 #define WATCHDOG
+#define FASTINIT
+
 
 /*----------------------------------------------       End of configurable parameters      ----------------------------------------------------*/
 

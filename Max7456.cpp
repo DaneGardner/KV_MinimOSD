@@ -80,7 +80,11 @@ void MAX7456_Setup(void)
   pinMode(MAX7456RESET,OUTPUT);
   digitalWrite(MAX7456RESET,HIGH); //hard enable
 
+#ifdef FASTINIT
+  delay(25);
+#else
   delay(250);
+#endif
 
   pinMode(MAX7456SELECT,OUTPUT);
   digitalWrite(MAX7456SELECT,HIGH); //disable device
@@ -99,13 +103,23 @@ void MAX7456_Setup(void)
   uint8_t spi_junk;
   spi_junk=SPSR;
   spi_junk=SPDR;
+
+#ifdef FASTINIT
+  delay(25);
+#else
   delay(250);
+#endif
 
   // force soft reset on Max7456
   digitalWrite(MAX7456SELECT,LOW);
   MAX7456_Send(VM0_reg, MAX7456_reset);
   digitalWrite(MAX7456SELECT,HIGH);
+
+#ifdef FASTINIT
+  delay(150);
+#else
   delay(500);
+#endif
 
   // set all rows to same character white level, 90%
   digitalWrite(MAX7456SELECT,LOW);
@@ -125,7 +139,12 @@ void MAX7456_Setup(void)
     spi_transfer(OSD_ENABLE|VIDEO_MODE_NTSC);
   }
   digitalWrite(MAX7456SELECT,HIGH);
+
+#ifdef FASTINIT
+  delay(25);
+#else
   delay(100);
+#endif
   
   EIMSK |= (1 << INT0);  // enable interuppt
   EICRA |= (1 << ISC01); // interrupt at the falling edge
